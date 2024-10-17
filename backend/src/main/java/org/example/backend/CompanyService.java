@@ -1,6 +1,7 @@
 package org.example.backend;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CompanyService {
@@ -10,7 +11,9 @@ public class CompanyService {
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
-
+    public Optional<Company> getCompanyById(String id) {
+        return companyRepository.findById(UUID.fromString(id));
+    }
     public Company addCompany(Company company) {
         Company newCompany = new Company(
                 UUID.randomUUID().toString(),
@@ -32,4 +35,8 @@ public class CompanyService {
                 .map(existingCompany -> companyRepository.save(company))
                 .orElseThrow(() -> new RuntimeException("Company not found"));
     }
+    public void deleteCompany(String id) {
+        companyRepository.deleteById(UUID.fromString(id));
+    }
+
 }
