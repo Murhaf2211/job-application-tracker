@@ -2,8 +2,6 @@ package org.example.backend;
 
 import lombok.With;
 
-import java.time.LocalDate;
-
 @With
 public record Company(
         String id,
