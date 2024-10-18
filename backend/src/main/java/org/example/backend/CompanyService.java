@@ -1,19 +1,22 @@
 package org.example.backend;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
+@RequiredArgsConstructor
+
 public class CompanyService {
 
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
-    }
-
-    public Optional<Company> getCompanyById(String id) {
-        return companyRepository.findById(UUID.fromString(id));
     }
 
     public Company addCompany(Company company) {
@@ -34,13 +37,20 @@ public class CompanyService {
     }
 
     public Company updateCompany(String id, Company company) {
-        return companyRepository.findById(UUID.fromString(id))
-                .map(existingCompany -> companyRepository.save(company))
+        Company newCompany = companyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Company not found"));
+
+          Company updatedcompany = new Company(
+                 newCompany.id(),
+                 company.name(), company.contactPerson(), company.jobTitle(), company.phone(),
+                 company.email(), company.companyWebPage(),
+                 company.status(), company.date(), company.moreInfo(), company.meetingDate());
+         return companyRepository.save(updatedcompany);
+
     }
 
     public void deleteCompany(String id) {
-        companyRepository.deleteById(UUID.fromString(id));
+        companyRepository.deleteById(id);
     }
 
     public List<Company> getCompaniesByStatus(String status) {

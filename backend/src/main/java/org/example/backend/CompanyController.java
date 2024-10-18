@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/companies")
+@RequestMapping("api/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
     @GetMapping
     public List<Company> getAllCompanies() {
@@ -20,11 +20,6 @@ public class CompanyController {
     @PostMapping
     public Company addCompany(@RequestBody Company company) {
         return companyService.addCompany(company);
-    }
-
-    @GetMapping("/{id}")
-    public Company getCompanyById(@PathVariable String id) {
-        return companyService.getCompanyById(id).orElseThrow(() -> new RuntimeException("Company not found"));
     }
 
     @PutMapping("/{id}")

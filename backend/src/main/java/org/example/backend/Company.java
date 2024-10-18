@@ -14,8 +14,8 @@ public record Company(
         String email,
         String companyWebPage,
         String status,
-        LocalDate date,
+        String date,
         String moreInfo,
-        LocalDate meetingDate
+        String meetingDate
         ) {
 }
