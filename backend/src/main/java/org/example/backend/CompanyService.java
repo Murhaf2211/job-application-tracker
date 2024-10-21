@@ -49,10 +49,12 @@ public class CompanyService {
     }
 
     public void deleteCompany(String id) {
+
         companyRepository.deleteById(id);
     }
 
     public List<Company> getCompaniesByStatus(String status) {
+
         return companyRepository.findByStatus(status);
     }
 
