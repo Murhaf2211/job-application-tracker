@@ -119,4 +119,5 @@ class CompanyServiceTest {
         assertEquals(expected, result);
         verify(companyRepository).findByStatus("Active");
     }
+
 }
