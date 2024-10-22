@@ -15,6 +15,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies() {
+
         return companyRepository.findAll();
     }
 
@@ -49,10 +50,12 @@ public class CompanyService {
     }
 
     public void deleteCompany(String id) {
+
         companyRepository.deleteById(id);
     }
 
     public List<Company> getCompaniesByStatus(String status) {
+
         return companyRepository.findByStatus(status);
     }
 
