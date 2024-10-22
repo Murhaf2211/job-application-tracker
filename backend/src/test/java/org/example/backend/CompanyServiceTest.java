@@ -93,4 +93,30 @@ class CompanyServiceTest {
         assertEquals("Company not found", exception.getMessage());
         verify(companyRepository).findById("1");
     }
+    @Test
+    void deleteCompany_shouldDeleteCompany_whenIdExists() {
+        companyService.deleteCompany("1");
+
+        verify(companyRepository).deleteById("1");
+    }
+
+    @Test
+    void getCompaniesByStatus_shouldReturnEmptyList_whenNoCompaniesMatchStatus() {
+        when(companyRepository.findByStatus("Inactive")).thenReturn(Collections.emptyList());
+        List<Company> result = companyService.getCompaniesByStatus("Inactive");
+
+        assertTrue(result.isEmpty());
+        verify(companyRepository).findByStatus("Inactive");
+    }
+
+    @Test
+    void getCompaniesByStatus_shouldReturnCompaniesMatchingStatus() {
+        List<Company> expected = List.of(existingCompany);
+
+        when(companyRepository.findByStatus("Active")).thenReturn(expected);
+        List<Company> result = companyService.getCompaniesByStatus("Active");
+
+        assertEquals(expected, result);
+        verify(companyRepository).findByStatus("Active");
+    }
 }
