@@ -19,8 +19,8 @@ class CompanyServiceTest {
 
     @BeforeEach
     void setUp() {
-        companyRepository = mock(CompanyRepository.class);
-        companyService = new CompanyService(companyRepository);
+        companyRepository = mock(CompanyRepository.class);// Mock the repository
+        companyService = new CompanyService(companyRepository); // Initialize the service with the mock repository
 
         existingCompany = new Company(
                 "1", "Existing Company", "Tom Tom", "Manager", "1234567890",
@@ -36,7 +36,9 @@ class CompanyServiceTest {
     @Test
     void getAllCompanies_shouldReturnEmptyList_whenNoCompaniesExist() {
         when(companyRepository.findAll()).thenReturn(Collections.emptyList());
+
         List<Company> result = companyService.getAllCompanies();
+
         assertTrue(result.isEmpty());
         verify(companyRepository).findAll();
     }
@@ -44,7 +46,9 @@ class CompanyServiceTest {
     void getAllCompanies_shouldReturnListOfCompanies_whenCompaniesExist() {
         List<Company> expected = List.of(existingCompany);
         when(companyRepository.findAll()).thenReturn(expected);
+
         List<Company> result = companyService.getAllCompanies();
+
         assertEquals(expected, result);
         verify(companyRepository).findAll();
     }
@@ -56,9 +60,37 @@ class CompanyServiceTest {
                 newCompany.phone(), newCompany.email(), newCompany.companyWebPage(),
                 newCompany.status(), newCompany.date(), newCompany.moreInfo(), newCompany.meetingDate()
         );
+
         when(companyRepository.save(any(Company.class))).thenReturn(expected);
         Company result = companyService.addCompany(newCompany);
+
         verify(companyRepository).save(any(Company.class));
         assertEquals(expected, result);
+    }
+    @Test
+    void updateCompany_shouldUpdateCompany_whenCompanyExists() {
+        Company updatedCompany = new Company(
+                "1", "Updated Company", "Sara Doe", "Director", "5555555555",
+                "updated@example.com", "www.updatedcompany.com", "Inactive", "2024-03-01",
+                "Updated info", "2024-04-01"
+        );
+
+        when(companyRepository.findById("1")).thenReturn(Optional.of(existingCompany));
+        when(companyRepository.save(updatedCompany)).thenReturn(updatedCompany);
+        Company result = companyService.updateCompany("1", updatedCompany);
+
+        verify(companyRepository).findById("1");
+        verify(companyRepository).save(updatedCompany);
+        assertEquals(updatedCompany, result);
+    }
+
+    @Test
+    void updateCompany_shouldThrowRuntimeException_whenCompanyDoesNotExist() {
+        when(companyRepository.findById("1")).thenReturn(Optional.empty());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> companyService.updateCompany("1", existingCompany));
+
+        assertEquals("Company not found", exception.getMessage());
+        verify(companyRepository).findById("1");
     }
 }

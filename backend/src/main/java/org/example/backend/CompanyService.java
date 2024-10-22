@@ -15,6 +15,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies() {
+
         return companyRepository.findAll();
     }
 
