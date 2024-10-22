@@ -48,4 +48,17 @@ class CompanyServiceTest {
         assertEquals(expected, result);
         verify(companyRepository).findAll();
     }
+    @Test
+    void addCompany_shouldAddNewCompanyWithGeneratedId() {
+        String generatedId = UUID.randomUUID().toString();
+        Company expected = new Company(
+                generatedId, newCompany.name(), newCompany.contactPerson(), newCompany.jobTitle(),
+                newCompany.phone(), newCompany.email(), newCompany.companyWebPage(),
+                newCompany.status(), newCompany.date(), newCompany.moreInfo(), newCompany.meetingDate()
+        );
+        when(companyRepository.save(any(Company.class))).thenReturn(expected);
+        Company result = companyService.addCompany(newCompany);
+        verify(companyRepository).save(any(Company.class));
+        assertEquals(expected, result);
+    }
 }
