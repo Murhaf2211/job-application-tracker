@@ -17,7 +17,7 @@ const AppNavbar = () => {
                         width="50"
                         height="50"
                         className="d-inline-block align-top"
-                    />{' '}
+                    />{'  '}
                     J A T
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
