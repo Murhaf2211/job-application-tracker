@@ -13,12 +13,12 @@ const AppNavbar = () => {
                 <Navbar.Brand href="#home">
                     <img
                         alt="Logo"
-                        src="../../public/logo.png"  // Make sure to place a logo image in your public folder
+                        src="logo.png"  // Make sure to place a logo image in your public folder
                         width="50"
                         height="50"
                         className="d-inline-block align-top"
                     />{'  '}
-                    J A T
+                    &nbsp; J A T
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
