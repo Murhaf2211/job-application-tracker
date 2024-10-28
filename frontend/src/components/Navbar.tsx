@@ -8,15 +8,15 @@ const AppNavbar = () => {
     };
 
     return (
-        <Navbar bg="primary" variant="dark" expand="lg" className="mb-4">
+        <Navbar bg="primary" variant="dark" expand="lg" className="rounded-2  mb-4">
             <Container>
                 <Navbar.Brand href="#home">
                     <img
                         alt="Logo"
-                        src="logo.png"  // Make sure to place a logo image in your public folder
+                        src="logo.png"  // the place of logo image in public folder.
                         width="50"
                         height="50"
-                        className="d-inline-block align-top"
+                        className="d-inline-block align-top rounded-2"
                     />{'  '}
                     &nbsp; J A T
                 </Navbar.Brand>

@@ -1,0 +1,24 @@
+/* Highlight styles */
+.highlight-meeting {
+    background-color: #d4edda !important;
+    border-radius: 10%;
+    font-weight: bold !important;
+}
+
+/* Highlight current day */
+.highlight-current-day {
+    background-color: #5a9afa !important;
+    color: white;
+    border-radius: 10%;
+}
+.side-br {
+    background-color: #5a9afa !important;
+    border-radius: 5px;
+    margin-bottom: 6vw;
+    height: auto;
+    width: 25vw;
+}
+.table-header-colour{
+    background-color: #5a9afa !important;
+    color: white !important;
+}

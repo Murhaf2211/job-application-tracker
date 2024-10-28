@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home';
+import './App.css';
 
 const App = () => {
     return (
