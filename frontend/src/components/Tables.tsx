@@ -263,7 +263,7 @@ const CompanyTable: React.FC = () => {
                                     name="meetingDate"
                                     value={selectedCompany.meetingDate || ""}
                                     onChange={handleChange}
-                                    disabled={selectedCompany.status !== "Positive"}
+                                    disabled={selectedCompany.status === "pending"}
                                 />
                             </Form.Group>
                         </Form>
