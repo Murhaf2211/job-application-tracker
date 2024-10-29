@@ -13,7 +13,8 @@ const Sidebar = () => {
         companyWebPage: '',
         status: 'pending',
         date: '',
-        moreInfo: ''
+        moreInfo: '',
+        meetingDate:''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -44,7 +45,8 @@ const Sidebar = () => {
                     companyWebPage: '',
                     status: 'pending',
                     date: '',
-                    moreInfo: ''
+                    moreInfo: '',
+                    meetingDate:''
                 });
             })
             .catch(error => console.error("Error adding company:", error));
@@ -153,6 +155,16 @@ const Sidebar = () => {
                         placeholder="Enter additional information about the company"
                         name="moreInfo"
                         value={formData.moreInfo}
+                        onChange={handleChange}
+                    />
+                </Form.Group><br/>
+                <Form.Group controlId="meetingDate">
+                    <Form.Label>Meeting Date</Form.Label>
+                    <Form.Control
+                        type="date"
+                        name="meetingDate"
+                        max={new Date().toISOString().split('T')[0]}
+                        value={formData.meetingDate}
                         onChange={handleChange}
                     />
                 </Form.Group>
