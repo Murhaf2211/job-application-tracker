@@ -22,7 +22,7 @@ const CompanyTable: React.FC = () => {
     const [companies, setCompanies] = useState<Company[]>([]);
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
     const [showModal, setShowModal] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
 
     // Fetch all companies on component mount
     const fetchCompanies = async () => {
@@ -73,31 +73,24 @@ const CompanyTable: React.FC = () => {
         }
     };
 
-    // Calendar date highlighting logic
-    const tileClassName = ({ date }: { date: Date }) => {
-        const isMeetingDate = companies.some(
-            company =>
-                company.meetingDate &&
-                new Date(company.meetingDate).toDateString() === date.toDateString()
-        );
-        const isCurrentDate = date.toDateString() === new Date().toDateString();
-
-        return isMeetingDate ? 'highlight-meeting' : isCurrentDate ? 'highlight-current' : null;
-    };
-
     // Group companies by their status
     const pendingCompanies = companies.filter(company => company.status === "pending");
     const waitingCompanies = companies.filter(company => company.status === "Waiting");
     const negativeCompanies = companies.filter(company => company.status === "Negative");
     const positiveCompanies = companies.filter(company => company.status === "Positive");
 
+    const positiveMeetingDates = companies
+        .filter(company => company.status === "Positive" && company.meetingDate)
+        .map(company => new Date(company.meetingDate!).toDateString());
+
     return (
         <div className="container my-4">
             <h3>Company Meetings Calendar</h3>
             <Calendar
-                onChange={setSelectedDate}
-                value={selectedDate}
-                tileClassName={tileClassName}
+                tileClassName={({ date }) => {
+                    // Check if the date is a positive meeting date
+                    return positiveMeetingDates.includes(date.toDateString()) ? 'highlight-meeting' : null;
+                }}
             />
             <br />
             <hr />
@@ -156,14 +149,14 @@ const CompanyTable: React.FC = () => {
 
             {/* Modal for editing company */}
             {selectedCompany && (
-                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal  className="modal" show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Company Information</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group>
-                                <Form.Label>Company Name</Form.Label>
+                                <Form.Label className="modalLable">Company Name</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="name"
@@ -173,7 +166,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Contact Person</Form.Label>
+                                <Form.Label className="modalLable">Contact Person</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="contactPerson"
@@ -183,7 +176,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Job Title</Form.Label>
+                                <Form.Label className="modalLable">Job Title</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="jobTitle"
@@ -193,7 +186,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Label className="modalLable">Phone Number</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="phone"
@@ -203,7 +196,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Email </Form.Label>
+                                <Form.Label className="modalLable">Email </Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="email"
@@ -213,7 +206,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Web Page</Form.Label>
+                                <Form.Label className="modalLable">Web Page</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="companyWebPage"
@@ -223,7 +216,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Status</Form.Label>
+                                <Form.Label className="modalLableRed">Status</Form.Label>
                                 <Form.Control
                                     as="select"
                                     name="status"
@@ -237,7 +230,7 @@ const CompanyTable: React.FC = () => {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Date</Form.Label>
+                                <Form.Label className="modalLable">Date</Form.Label>
                                 <Form.Control
                                     type="date"
                                     name="date"
@@ -247,7 +240,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>More Info</Form.Label>
+                                <Form.Label className="modalLable">More Info</Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     name="moreInfo"
@@ -257,7 +250,7 @@ const CompanyTable: React.FC = () => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Meeting Date</Form.Label>
+                                <Form.Label className="modalLableRed">Meeting Date</Form.Label>
                                 <Form.Control
                                     type="date"
                                     name="meetingDate"

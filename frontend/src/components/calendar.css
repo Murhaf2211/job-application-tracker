@@ -22,3 +22,14 @@
     background-color: #5a9afa !important;
     color: white !important;
 }
+.modal{
+    color: #394e9a;
+}
+.modalLable{
+    color: #5a9afa;
+    font-size: 1vw;
+}
+.modalLableRed{
+    color:darkred;
+    font-size: 1vw;
+}
