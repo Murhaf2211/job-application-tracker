@@ -22,6 +22,30 @@
     background-color: #5a9afa !important;
     color: white !important;
 }
+.table-header-colour:first-of-type{
+    color: #f2f8ae !important;
+}
+.table-header-colour:nth-of-type(2){
+    color: #f4b466 !important;
+}
+.table-header-colour:nth-of-type(3){
+    color: #fb7757 !important;
+}
+.table-header-colour:last-of-type{
+    color: #5afa8d !important;
+}
+.table-body:first-of-type{
+    background-color: #f1f6d1 !important;
+}
+.table-body:nth-of-type(2){
+    background-color: #f3e6de !important;
+}
+.table-body:nth-of-type(3){
+    background-color: #fbeaed !important;
+}
+.table-body:last-of-type{
+    background-color: #ddf6e6 !important;
+}
 .modal{
     color: #394e9a;
 }

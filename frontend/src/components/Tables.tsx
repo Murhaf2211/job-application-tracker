@@ -98,10 +98,10 @@ const CompanyTable: React.FC = () => {
             <Table responsive bordered hover>
                 <thead>
                 <tr>
-                    <th>Pending Company</th>
-                    <th>Waiting Company</th>
-                    <th>Negative Company</th>
-                    <th>Positive Company</th>
+                    <th className="table-header-colour">Pending Company</th>
+                    <th className="table-header-colour">Waiting Company</th>
+                    <th className="table-header-colour">Negative Company</th>
+                    <th className="table-header-colour">Positive Company</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -114,28 +114,28 @@ const CompanyTable: React.FC = () => {
                     )
                 }).map((_, rowIndex) => (
                     <tr key={rowIndex}>
-                        <td>
+                        <td className="table-body">
                             {pendingCompanies[rowIndex] ? (
                                 <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(pendingCompanies[rowIndex]); setShowModal(true); }}>
                                     {pendingCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
-                        <td>
+                        <td className="table-body">
                             {waitingCompanies[rowIndex] ? (
                                 <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(waitingCompanies[rowIndex]); setShowModal(true); }}>
                                     {waitingCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
-                        <td>
+                        <td className="table-body">
                             {negativeCompanies[rowIndex] ? (
                                 <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(negativeCompanies[rowIndex]); setShowModal(true); }}>
                                     {negativeCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
-                        <td>
+                        <td className="table-body">
                             {positiveCompanies[rowIndex] ? (
                                 <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(positiveCompanies[rowIndex]); setShowModal(true); }}>
                                     {positiveCompanies[rowIndex].name}
