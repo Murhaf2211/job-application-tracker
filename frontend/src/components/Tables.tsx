@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 
+
 interface Company {
     id?: string;
     name: string;
@@ -82,7 +83,6 @@ const CompanyTable: React.FC = () => {
     const positiveMeetingDates = companies
         .filter(company => company.status === "Positive" && company.meetingDate)
         .map(company => new Date(company.meetingDate!).toDateString());
-
     return (
         <div className="container my-4">
             <h3>Company Meetings Calendar</h3>
