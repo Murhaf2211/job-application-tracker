@@ -1,11 +1,10 @@
-/* Highlight styles */
+
 .highlight-meeting {
     background-color: #d4edda !important;
     border-radius: 10%;
     font-weight: bold !important;
 }
 
-/* Highlight current day */
 .highlight-current-day {
     background-color: #5a9afa !important;
     color: white;
@@ -20,5 +19,39 @@
 }
 .table-header-colour{
     background-color: #5a9afa !important;
-    color: white !important;
+}
+.table-header-colour:first-of-type{
+    color: #f8f8f0 !important;
+}
+.table-header-colour:nth-of-type(2){
+    color: #f6f3eb !important;
+}
+.table-header-colour:nth-of-type(3){
+    color: #faf0ed !important;
+}
+.table-header-colour:last-of-type{
+    color: #e5f8eb !important;
+}
+.table-body:first-of-type{
+    background-color: #f1f6d1 !important;
+}
+.table-body:nth-of-type(2){
+    background-color: #f3e6de !important;
+}
+.table-body:nth-of-type(3){
+    background-color: #fbeaed !important;
+}
+.table-body:last-of-type{
+    background-color: #ddf6e6 !important;
+}
+.modal{
+    color: #394e9a;
+}
+.modalLable{
+    color: #5a9afa;
+    font-size: 1vw;
+}
+.modalLableRed{
+    color:darkred;
+    font-size: 1vw;
 }
