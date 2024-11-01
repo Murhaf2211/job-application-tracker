@@ -1,50 +1,47 @@
 package org.example.backend;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-@Transactional
-@Slf4j
-public  class UserServiceImpl implements UserService {
-    private final UserRepo userRepo;
-    private final RoleRepo rolRepo;
+public class UserServiceImpl implements UserService {
 
+   @Autowired
+   private UserRepo userRepository; // Repository for User operations
+
+   @Autowired
+   private RoleRepo roleRepository; // Repository for Role operations
 
    @Override
-   public User saveUser(User user) {
-      log.info("save user {}", user.getName());
-      return userRepo.save(user);
+   public ApiUser saveUser(ApiUser user) {
+      return userRepository.save(user); // Save user in MongoDB
    }
 
    @Override
-   public Role saveRole(Role role) {
-      log.info("save role {}", role.getName());
-      return rolRepo.save(role);
+   public ApiRole saveRole(ApiRole role) {
+      return roleRepository.save(role); // Save role in MongoDB
    }
 
    @Override
    public void addRoleToUser(String username, String roleName) {
-      log.info("add role {} to user {}", roleName, username);
-      User user = userRepo.findByUsername(username);
-      Role role = rolRepo.findByName(roleName);
-      user.getRoles().add(role);
+      ApiUser user = userRepository.findByUsername(username); // Find user by username
+      ApiRole role = roleRepository.findByName(roleName); // Find role by name
+
+      if (user != null && role != null) {
+         user.getRoles().add(role); // Add role to user's roles
+         userRepository.save(user); // Save the updated user
+      }
    }
 
    @Override
-   public User getUser(String username) {
-      log.info("get user {}", username);
-      return userRepo.findByUsername(username);
+   public ApiUser getUser(String username) {
+      return userRepository.findByUsername(username); // Get user by username
    }
 
    @Override
-   public List<User> getUsers() {
-      log.info("get all users");
-      return userRepo.findAll();
+   public List<ApiUser> getUsers() {
+      return userRepository.findAll(); // Get all users
    }
 }

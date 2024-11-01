@@ -1,7 +1,9 @@
 package org.example.backend;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RoleRepo extends JpaRepository<Role, Long> {
-    Role findByName(String name);
+@Repository
+public interface RoleRepo extends MongoRepository<ApiRole, String> {
+    ApiRole findByName(String name); // Custom method to find a role by name
 }
