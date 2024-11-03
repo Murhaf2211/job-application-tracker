@@ -1,48 +1,54 @@
 package org.example.backend;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/companies")
 public class UserResource {
     private final UserService userService;
 
-    // Get all users
     @GetMapping("/users")
     public ResponseEntity<List<ApiUser>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    // Register a new user
-    @PostMapping("/register")
+    @PostMapping("/users/save")
     public ResponseEntity<ApiUser> registerUser(@RequestBody ApiUser user) {
-        return ResponseEntity.ok(userService.saveUser(user)); // Save the user and return the created user
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-    // Create a new role
-    @PostMapping("/roles")
+    @PostMapping("/role/save")
     public ResponseEntity<ApiRole> createRole(@RequestBody ApiRole role) {
-        return ResponseEntity.ok(userService.saveRole(role)); // Save the role and return the created role
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/roles").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
-    // Assign a role to a user
-    @PostMapping("/users/{username}/roles/{roleName}")
-    public ResponseEntity<Void> assignRoleToUser(@PathVariable String username, @PathVariable String roleName) {
-        userService.addRoleToUser(username, roleName); // Assign the specified role to the user
+
+    @PostMapping("/role/addtouser")
+    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
+        userService.addRoleToUser(form.getUsername(),form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
-    // Get a user by username
     @GetMapping("/users/{username}")
     public ResponseEntity<ApiUser> getUser(@PathVariable String username) {
         ApiUser user = userService.getUser(username);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build(); // Return user or 404 if not found
     }
+}
+@Data
+class RoleToUserForm {
+    private String username;
+    private String roleName;
 }
