@@ -1,11 +1,11 @@
 
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+interface NavbarProps {
+    isAuthenticated: boolean;
+    onLogout: () => void;
+}
+const AppNavbar : React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
 
-const AppNavbar = () => {
-    const handleLogout = () => {
-        // Logic to handle user logout
-        console.log('Logout clicked');
-    };
 
     return (
         <Navbar bg="primary" variant="dark" expand="lg" className="rounded-2  mb-4">
@@ -23,10 +23,13 @@ const AppNavbar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="#user">Signed in as: <strong>User Name</strong></Nav.Link>
-                        <Button variant="outline-light" onClick={handleLogout}>
+                        {isAuthenticated ? (
+                        <Button variant="outline-light" onClick={onLogout}>
                             Logout
                         </Button>
+                            ) : (
+                            <div>Welcome, please log in.</div>
+                            )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

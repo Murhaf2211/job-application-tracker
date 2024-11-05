@@ -1,15 +1,16 @@
 
-import AppNavbar from './Navbar';
+
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import ResponsiveExample from "./Tables.tsx";
+
 
 const Home = () => {
 
 
     return (
         <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
-            <AppNavbar />
+
             <div className="d-flex" style={{ flexGrow: 1 }}>
                 <Sidebar/>
                 <div className="p-4 w-100">
