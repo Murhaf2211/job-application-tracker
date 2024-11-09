@@ -38,7 +38,6 @@ const Register: React.FC = () => {
                             <h3 className="text-center text-primary mb-4">Register</h3>
                             <Form onSubmit={handleRegister}>
                                 <Form.Group controlId="name" className="mb-3">
-                                    <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter name"
@@ -48,7 +47,6 @@ const Register: React.FC = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="username" className="mb-3">
-                                    <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter username"
@@ -58,7 +56,6 @@ const Register: React.FC = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="email" className="mb-3">
-                                    <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
                                         placeholder="Enter email"
@@ -68,7 +65,6 @@ const Register: React.FC = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="password" className="mb-3">
-                                    <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         type="password"
                                         placeholder="Enter password"

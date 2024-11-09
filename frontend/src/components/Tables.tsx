@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Button, Form } from 'react-bootstrap';
+import {Table, Modal, Button, Form, InputGroup} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
-
+import './calendar.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface Company {
     id?: string;
@@ -83,17 +85,62 @@ const CompanyTable: React.FC = () => {
     const positiveMeetingDates = companies
         .filter(company => company.status === "Positive" && company.meetingDate)
         .map(company => new Date(company.meetingDate!).toDateString());
+
+    const [address, setAddress] = useState<string>('');
+
+    // Function to open Google Maps with the address
+    const searchGoogleMaps = () => {
+        if (address) {
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+            window.open(googleMapsUrl, '_blank');
+        } else {
+            alert("Please enter an address to search.");
+        }
+    };
+
     return (
         <div className="container my-4">
-            <h3>Company Meetings Calendar</h3>
-            <Calendar
-                tileClassName={({ date }) => {
-                    // Check if the date is a positive meeting date
-                    return positiveMeetingDates.includes(date.toDateString()) ? 'highlight-meeting' : null;
-                }}
-            />
-            <br />
-            <hr />
+            <div className="welcome-card shadow-sm text-center mb-4">
+                <div className="d-flex flex-column align-items-center">
+
+                    <div className="welcome-icon mb-2">
+                        <i className="fas fa-rocket"></i>
+                    </div>
+
+                    <div>
+                        <h2 className="welcome-header">Welcome back !
+                        </h2>
+                        <p className="welcome-subtitle">
+                            You’re just a few steps away from landing your dream job. Keep track, stay organized, and
+                            make every application count. Let's make some progress today!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="d-flex flex-row justify-content-around ">
+                <Calendar
+                    tileClassName={({date}) => {
+                     // Check if the date is a positive meeting date
+                         return positiveMeetingDates.includes(date.toDateString()) ? 'highlight-meeting' : null;
+                    }}
+                />
+                <Form className="my-4">
+                    <Form.Label className="font-weight-bold">Find the Address:</Form.Label>
+                    <InputGroup >
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter an address"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+
+                            <Button variant="primary" onClick={searchGoogleMaps}>Search</Button>
+
+                    </InputGroup>
+                </Form>
+            </div>
+            <br/>
+            <hr/>
             <h3>Company List</h3>
             <Table responsive bordered hover>
                 <thead>
@@ -116,28 +163,44 @@ const CompanyTable: React.FC = () => {
                     <tr key={rowIndex}>
                         <td className="table-body">
                             {pendingCompanies[rowIndex] ? (
-                                <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(pendingCompanies[rowIndex]); setShowModal(true); }}>
+                                <a href="#" onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedCompany(pendingCompanies[rowIndex]);
+                                    setShowModal(true);
+                                }}>
                                     {pendingCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
                         <td className="table-body">
                             {waitingCompanies[rowIndex] ? (
-                                <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(waitingCompanies[rowIndex]); setShowModal(true); }}>
+                                <a href="#" onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedCompany(waitingCompanies[rowIndex]);
+                                    setShowModal(true);
+                                }}>
                                     {waitingCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
                         <td className="table-body">
                             {negativeCompanies[rowIndex] ? (
-                                <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(negativeCompanies[rowIndex]); setShowModal(true); }}>
+                                <a href="#" onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedCompany(negativeCompanies[rowIndex]);
+                                    setShowModal(true);
+                                }}>
                                     {negativeCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
                         </td>
                         <td className="table-body">
                             {positiveCompanies[rowIndex] ? (
-                                <a href="#" onClick={(e) => { e.preventDefault(); setSelectedCompany(positiveCompanies[rowIndex]); setShowModal(true); }}>
+                                <a href="#" onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedCompany(positiveCompanies[rowIndex]);
+                                    setShowModal(true);
+                                }}>
                                     {positiveCompanies[rowIndex].name}
                                 </a>
                             ) : ""}
@@ -149,7 +212,7 @@ const CompanyTable: React.FC = () => {
 
             {/* Modal for editing company */}
             {selectedCompany && (
-                <Modal  className="modal" show={showModal} onHide={() => setShowModal(false)}>
+                <Modal className="modal" show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Company Information</Modal.Title>
                     </Modal.Header>

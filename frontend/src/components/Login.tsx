@@ -22,12 +22,16 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         <Container className="d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
             <Row>
                 <Col>
-                    <Card style={{width: '24rem'}} className="shadow-sm">
+                    <Card style={{width: '25rem'}} className="shadow-sm">
                         <Card.Body>
-                            <h3 className="text-center text-primary mb-4">Login</h3>
+                            <h1 className="text-center text-primary mb-4">Welcome to JAT</h1><hr/>
+                            <p className="text-center text-muted">Organize and track your job applications
+                                effortlessly!</p>
+                            <br/>
+                            <br/>
+                            <p className="mb-3">Please sign in to continue:</p>
                             <Form onSubmit={handleLogin}>
                                 <Form.Group controlId="username" className="mb-3">
-                                    <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter username"
@@ -37,7 +41,6 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="password" className="mb-3">
-                                    <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         type="password"
                                         placeholder="Enter password"
@@ -49,6 +52,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                                 <Button variant="primary" type="submit" className="w-100 mt-3">
                                     Login
                                 </Button>
+                                <hr/>
                                 <Button
                                     variant="link"
                                     className="w-100 mt-2 text-decoration-none"
@@ -56,6 +60,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                                 >
                                     Create an Account
                                 </Button>
+                                <hr/>
+                                <div className="mt-4 text-center">
+                                    <a href="/oauth2/authorization/google"
+                                       className="btn btn-outline-primary btn-block mb-3">Login with Google</a>
+                                    <a href="/oauth2/authorization/github" className="btn btn-outline-dark btn-block">Login
+                                        with GitHub</a>
+                                </div>
                             </Form>
                         </Card.Body>
                     </Card>

@@ -54,7 +54,7 @@ const Sidebar = () => {
 
     return (
         <div className="side-br p-4">
-            <h4>New Company</h4><br/><hr/>
+            <h4 id="newCompany">New Company</h4><br/><hr/>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Control
@@ -122,7 +122,7 @@ const Sidebar = () => {
                 </Form.Group>
 
                 <Form.Group controlId="statusSelect">
-                    <Form.Label>Status</Form.Label>
+                    <Form.Label className="formlabel">Status</Form.Label>
                     <Form.Control
                         as="select"
                         name="status"
@@ -159,7 +159,7 @@ const Sidebar = () => {
                     />
                 </Form.Group><br/>
                 <Form.Group controlId="meetingDate">
-                    <Form.Label>Meeting Date</Form.Label>
+                    <Form.Label className="formlabel">Meeting Date</Form.Label>
                     <Form.Control
                         type="date"
                         name="meetingDate"

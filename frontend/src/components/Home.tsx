@@ -15,7 +15,6 @@ const Home = () => {
                 <Sidebar/>
                 <div className="p-4 w-100">
                     {/* Render the list of companies */}
-                    <h4>Company List</h4>
                     <div className="mt-3">
                        <ResponsiveExample  />
                     </div>
