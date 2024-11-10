@@ -1,12 +1,10 @@
-
-
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import ResponsiveExample from "./Tables.tsx";
+import React from "react";
+import CompanyTable from "./Tables.tsx";
 
 
-const Home = () => {
-
+const Home: React.FC  = () => {
 
     return (
         <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
@@ -16,7 +14,7 @@ const Home = () => {
                 <div className="p-4 w-100">
                     {/* Render the list of companies */}
                     <div className="mt-3">
-                       <ResponsiveExample  />
+                       <CompanyTable  />
                     </div>
                 </div>
             </div>

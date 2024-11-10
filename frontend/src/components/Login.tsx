@@ -13,8 +13,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
 
     const handleLogin = () => {
-        // Perform login logic here
-        onLogin(); // Update authentication status
+        onLogin();
         navigate('/home'); // Redirect to Home page
     };
 

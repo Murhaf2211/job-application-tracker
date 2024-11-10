@@ -24,9 +24,11 @@ const App: React.FC = () => {
             <div>
                 <AppNavbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
                 <Routes>
-                    <Route path="/" element={!isAuthenticated ? <Login onLogin={handleLogin} /> : <Navigate to="/home" />} />
+                    <Route path="/" element={<Navigate to="/login"/>} />
+                    <Route path="/login" element={!isAuthenticated ? <Login onLogin={handleLogin} />: <Navigate to="/home" />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/" />} />
+                    <Route path="/logout" element={<Navigate to="/" />} />
+                    <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/" /> } />
                 </Routes>
                 <Footer />
             </div>

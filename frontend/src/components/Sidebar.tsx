@@ -22,16 +22,7 @@ const Sidebar = () => {
         setFormData(prevData => ({ ...prevData, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const requiredFields = ['name', 'contactPerson', 'phone', 'email'];
-        for (const field of requiredFields) {
-            if (!formData[field as keyof typeof formData]) {
-                alert(`Please fill in the ${field} field.`);
-                return;
-            }
-        }
+    const handleSubmit = () => {
 
         axios.post('/api/companies', formData)
             .then(response => {
