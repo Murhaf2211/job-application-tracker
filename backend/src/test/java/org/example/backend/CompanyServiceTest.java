@@ -1,5 +1,8 @@
 package org.example.backend;
 
+import org.example.backend.company.Company;
+import org.example.backend.company.CompanyRepository;
+import org.example.backend.company.CompanyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

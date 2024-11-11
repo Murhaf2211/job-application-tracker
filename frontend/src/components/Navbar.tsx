@@ -1,11 +1,22 @@
-
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import React from "react";
+import {useNavigate} from "react-router-dom";
 
-const AppNavbar = () => {
-    const handleLogout = () => {
-        // Logic to handle user logout
-        console.log('Logout clicked');
+interface NavbarProps {
+    isAuthenticated: boolean;
+    onLogout: () => void;
+
+}
+
+const AppNavbar : React.FC<NavbarProps> = ({ isAuthenticated, onLogout, }) => {
+
+    const navigate = useNavigate();
+
+    const handlelogout = () => {
+        onLogout();
+        navigate('/login'); // Redirect to Home page
     };
+
 
     return (
         <Navbar bg="primary" variant="dark" expand="lg" className="rounded-2  mb-4">
@@ -23,10 +34,15 @@ const AppNavbar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="#user">Signed in as: <strong>User Name</strong></Nav.Link>
-                        <Button variant="outline-light" onClick={handleLogout}>
-                            Logout
-                        </Button>
+                        {isAuthenticated ? (
+                            <Button variant="outline-light" onClick={handlelogout}>
+                             Logout
+                            </Button>
+                            ) : (
+                                <Button variant="outline-light" onClick={handlelogout}>
+                                   Login
+                                </Button>
+                            )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
