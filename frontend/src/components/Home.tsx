@@ -1,11 +1,9 @@
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import React from "react";
 import CompanyTable from "./Tables.tsx";
 
 
-const Home: React.FC  = () => {
-
+const Home = () => {
     return (
         <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
 

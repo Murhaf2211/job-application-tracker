@@ -22,8 +22,8 @@ const Sidebar = () => {
         setFormData(prevData => ({ ...prevData, [name]: value }));
     };
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         axios.post('/api/companies', formData)
             .then(response => {
                 console.log("Company added successfully:", response.data);

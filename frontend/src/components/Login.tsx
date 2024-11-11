@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 
 
 interface LoginProps {
     onLogin: () => void;
 }
+
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -16,23 +16,12 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         onLogin();
         navigate('/home'); // Redirect to Home page
     };
-    const gitLogin = () => {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
-        window.open(host + '/oauth2/authorization/github', '_self')
-    }
-    const loadUser = () => {
-        gitLogin();
-        axios.get('/api/auth/me')
-            .then(response => {
-                console.log(response.data)
-            })
-    }
 
     return (
         <Container className="d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
             <Row>
                 <Col>
-                    <Card style={{width: '25rem'}} className="shadow-sm">
+                    <Card style={{width: '24rem'}} className="shadow-sm">
                         <Card.Body>
                             <h1 className="text-center text-primary mb-4">Welcome to JAT</h1><hr/>
                             <p className="text-center text-muted">Organize and track your job applications
@@ -70,11 +59,6 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                                 >
                                     Create an Account
                                 </Button>
-                                <hr/>
-                                <div className="mt-4 text-center">
-                                    <Button onClick={loadUser} className="btn btn-outline-dark btn-block">Login
-                                        with GitHub</Button>
-                                </div>
                             </Form>
                         </Card.Body>
                     </Card>
