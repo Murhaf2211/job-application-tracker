@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 interface LoginProps {
@@ -11,11 +12,21 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-
     const handleLogin = () => {
         onLogin();
         navigate('/home'); // Redirect to Home page
     };
+    const gitLogin = () => {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        window.open(host + '/oauth2/authorization/github', '_self')
+    }
+    const loadUser = () => {
+        gitLogin();
+        axios.get('/api/auth/me')
+            .then(response => {
+                console.log(response.data)
+            })
+    }
 
     return (
         <Container className="d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
@@ -61,10 +72,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                                 </Button>
                                 <hr/>
                                 <div className="mt-4 text-center">
-                                    <a href="/oauth2/authorization/google"
-                                       className="btn btn-outline-primary btn-block mb-3">Login with Google</a>
-                                    <a href="/oauth2/authorization/github" className="btn btn-outline-dark btn-block">Login
-                                        with GitHub</a>
+                                    <Button onClick={loadUser} className="btn btn-outline-dark btn-block">Login
+                                        with GitHub</Button>
                                 </div>
                             </Form>
                         </Card.Body>
